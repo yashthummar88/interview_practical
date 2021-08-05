@@ -30,6 +30,14 @@ class DBHelper {
     return await db.rawInsert(sql);
   }
 
+  Future<int> deleteProduct(int? id) async {
+    var db = await initDB();
+
+    String query = "DELETE FROM $TABLE WHERE id=$id";
+    int deletedId = await db.rawDelete(query);
+    return deletedId;
+  }
+
   Future<List<Attribute>> getAllAttribute() async {
     var db = await initDB();
     String sql = "SELECT * FROM $TABLE";

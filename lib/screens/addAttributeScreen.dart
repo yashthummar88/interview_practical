@@ -52,6 +52,15 @@ class _AddAttributeScreenState extends State<AddAttributeScreen> {
                       return ListTile(
                         leading: Text("${data[i].id}"),
                         title: Text("${data[i].attribute}"),
+                        trailing: IconButton(
+                          onPressed: () async {
+                            await dbh.deleteProduct(data[i].id);
+                            setState(() {
+                              fetchAttribute = dbh.getAllAttribute();
+                            });
+                          },
+                          icon: Icon(Icons.delete),
+                        ),
                       );
                     },
                   );

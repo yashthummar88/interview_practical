@@ -81,12 +81,31 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             subtitle: Text(
                               "${data[i].type}",
                               style: TextStyle(
-                                color: Colors.orange,
+                                color: Colors.black,
                                 fontSize: 18,
                                 letterSpacing: 1,
                               ),
                             ),
-                            trailing: Text("${data[i].quantity}"),
+                            trailing: Wrap(
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                              children: [
+                                Text("${data[i].quantity}"),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                IconButton(
+                                  onPressed: () async {
+                                    await dbproduct.deleteProduct(data[i].id);
+                                    setState(() {
+                                      allProducts = dbproduct.getAllData();
+                                    });
+                                  },
+                                  icon: Icon(
+                                    Icons.delete,
+                                  ),
+                                ),
+                              ],
+                            ),
                           );
                         },
                       );
